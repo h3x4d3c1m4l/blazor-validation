@@ -108,18 +108,18 @@ namespace PeterLeslieMorris.Blazor.Validation.Extensions
 			}
 
 			var fieldIdentifier = new FieldIdentifier(instance, propertyName);
-			object fieldState = GetFieldStateMethod.Invoke(editContext, new object[] { fieldIdentifier, true });
+			object fieldState = GetFieldStateMethod.Invoke(editContext, new object[] { fieldIdentifier });
 
-			if (IsModifiedProperty == null)
+			if (IsModifiedProperty == null && fieldState != null)
 			{
 				IsModifiedProperty = fieldState.GetType().GetProperty(
 					"IsModified",
 					BindingFlags.Public | BindingFlags.Instance);
 			}
 
-			object originalIsModified = IsModifiedProperty.GetValue(fieldState);
+			object originalIsModified = IsModifiedProperty?.GetValue(fieldState);
 			editContext.NotifyFieldChanged(fieldIdentifier);
-			IsModifiedProperty.SetValue(fieldState, originalIsModified);
+			IsModifiedProperty?.SetValue(fieldState, originalIsModified);
 		}
 	}
 }
