@@ -115,11 +115,11 @@ namespace PeterLeslieMorris.Blazor.Validation.Extensions
 				IsModifiedProperty = fieldState.GetType().GetProperty(
 					"IsModified",
 					BindingFlags.Public | BindingFlags.Instance);
-			}
 
-			object originalIsModified = IsModifiedProperty?.GetValue(fieldState);
-			editContext.NotifyFieldChanged(fieldIdentifier);
-			IsModifiedProperty?.SetValue(fieldState, originalIsModified);
+				object originalIsModified = IsModifiedProperty?.GetValue(fieldState);
+				editContext.NotifyFieldChanged(fieldIdentifier);
+				IsModifiedProperty?.SetValue(fieldState, originalIsModified);
+			}
 		}
 	}
 }
